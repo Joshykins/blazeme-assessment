@@ -1,0 +1,12 @@
+blazeme-frontend/node_modules/
+blazeme-frontend/yarn.lock
+blazeme-frontend/package-lock.json
+blazeme-frontend/.awcache
+blazeme-frontend/.idea
+blazeme-frontend/dist/
+
+
+blazeme-backend/yarn.lock
+blazeme-backend/package-lock.json
+blazeme-backend/dist
+blazeme-backend/node_modules
