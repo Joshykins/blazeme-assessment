@@ -1,0 +1,24 @@
+{
+  "name": "blazme-frontend",
+  "version": "1.0.0",
+  "main": "src/entry/index.html",
+  "author": "Joshua Roelle",
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build src/entry/index.html",
+    "start": "parcel src/entry/index.html"
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.25.0"
+  }
+}

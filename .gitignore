@@ -4,9 +4,10 @@ blazeme-frontend/package-lock.json
 blazeme-frontend/.awcache
 blazeme-frontend/.idea
 blazeme-frontend/dist/
+blazeme-frontend/.cache/
 
 
 blazeme-backend/yarn.lock
 blazeme-backend/package-lock.json
 blazeme-backend/dist
-blazeme-backend/node_modules
+blazeme-backend/node_modules/
