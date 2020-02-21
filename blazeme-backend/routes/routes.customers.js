@@ -74,6 +74,9 @@ customerRouter.get('/', async (req, res) => {
   };
 });
 
+
+
+
 // PUT /customers/update
 //*********************//
 // Updates a given customer
@@ -103,6 +106,9 @@ customerRouter.put('/update', async (req, res) => {
   };
 
 });
+
+
+
 
 // POST /customers/create
 //*********************//
@@ -140,7 +146,7 @@ customerRouter.post('/create', async (req, res) => {
 customerRouter.delete("/", async (req, res) => {
   try {
     const data = await customerModel.findOneAndDelete({ _id: req.body.id });
-    
+
     res.json("User Successfully Deleted!");
   }
   catch (err) {

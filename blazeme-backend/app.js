@@ -23,7 +23,9 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedT
   console.log("Connected to DB Sucessfully!");
 
   //Populate
-  populateCustomersTo(346237);
+  //Populates up to x amounts of users using randomuser.me
+  
+  //populateCustomersTo(346237);
 });
 
 

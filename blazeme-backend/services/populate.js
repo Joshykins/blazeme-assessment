@@ -2,6 +2,8 @@ import axios from 'axios';
 import { customerModel } from '../models/models.customers';
 import { response } from 'express';
 
+//randomuser.me customer generator
+//=========================
 //Populates up to x entries
 //Recursive function to split apart request into 5000 customer packets
 let populateCustomersTo = async (desiredEntries, countAdded) => {
