@@ -17,7 +17,7 @@ customerRouter.get('/totalcount', async (req, res) => {
 
 
 
-// GET /
+// GET /customers
 //*********************//
 // Returns customers based on some body parameters
 /*
@@ -60,13 +60,13 @@ customerRouter.get('/', async (req, res) => {
   try {
     let results = {
       data: await customerModel
-      .find(filters, null, { skip: skipAmount, limit: req.body.countPerPage })
-      .sort(sort),
+        .find(filters, null, { skip: skipAmount, limit: req.body.countPerPage })
+        .sort(sort),
       count: await customerModel
-      .countDocuments(filters, null, { skip: skipAmount, limit: req.body.countPerPage })
-      .sort(sort)
+        .countDocuments(filters, null, { skip: skipAmount, limit: req.body.countPerPage })
+        .sort(sort)
     }
-  
+
     res.json(results);
   }
   catch (err) {
@@ -74,7 +74,7 @@ customerRouter.get('/', async (req, res) => {
   };
 });
 
-// POST /customers/update
+// PUT /customers/update
 //*********************//
 // Updates a given customer
 /*
@@ -86,7 +86,7 @@ customerRouter.get('/', async (req, res) => {
   "phoneNumber": "760 500 0453"
 }
 */
-customerRouter.post('/update', async (req, res) => {
+customerRouter.put('/update', async (req, res) => {
   const editedCustomer = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -95,7 +95,7 @@ customerRouter.post('/update', async (req, res) => {
   }
 
   try {
-    let data = await customerModel.findOneAndUpdate({ id: req.id }, editedCustomer)
+    let data = await customerModel.findOneAndUpdate({ _id: req.body.id }, editedCustomer)
     res.json(editedCustomer);
   }
   catch (err) {
@@ -132,5 +132,20 @@ customerRouter.post('/create', async (req, res) => {
   };
 
 })
+
+
+// DELETE /customers
+//*********************//
+// Deletes a specified customer
+customerRouter.delete("/", async (req, res) => {
+  try {
+    const data = await customerModel.findOneAndDelete({ _id: req.body.id });
+    
+    res.json("User Successfully Deleted!");
+  }
+  catch (err) {
+    res.json({ message: err });
+  };
+});
 
 export { customerRouter };
