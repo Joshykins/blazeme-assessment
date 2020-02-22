@@ -16,7 +16,8 @@ import { customerRouter } from './routes/routes.customers';
 import bodyParser from 'body-parser';
 
 //Population Script
-import populateCustomersTo from './services/populate';
+import populateCustomersTo from './services/service.populate';
+import { customerModel } from './models/models.customers';
 
 //Connect To DB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
@@ -24,8 +25,7 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedT
 
   //Populate
   //Populates up to x amounts of users using randomuser.me
-  
-  //populateCustomersTo(346237);
+  populateCustomersTo(347237, customerModel);
 });
 
 

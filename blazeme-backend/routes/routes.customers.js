@@ -1,18 +1,16 @@
 import express from 'express';
 import { customerModel } from '../models/models.customers';
+import { retrieveCustomers, getTotalCount } from '../services/service.customers/service.customers.get';
+import { deleteCustomer } from '../services/service.customers/service.customer.delete';
+import { createCustomer } from '../services/service.customers/service.customer.create';
+import { updateCustomer } from '../services/service.customers/servicer.customer.update';
 const customerRouter = express.Router();
 
 // GET /customers/totalcount
 //*********************//
 // Returns the total amount of customers
 customerRouter.get('/totalcount', async (req, res) => {
-  try {
-    let data = await customerModel.countDocuments({})
-    res.json(data);
-  }
-  catch (err) {
-    res.json({ message: err });
-  };
+  res.json(await getTotalCount(customerModel));
 });
 
 
@@ -32,46 +30,7 @@ customerRouter.get('/totalcount', async (req, res) => {
 }
 */
 customerRouter.get('/', async (req, res) => {
-  //Find Record Offset
-  let skipAmount = 0;
-  if (req.body.page && req.body.countPerPage) {
-    skipAmount = (req.body.page - 1) * req.body.countPerPage;
-  }
-  //Get Sort
-  let sort = "firstName";
-  if (req.body.sort) {
-    sort = req.body.sort;
-  }
-  //Construct filter
-  let filters = {}
-  if (req.body.firstNameFilter) {
-    filters.firstName = new RegExp(req.body.firstNameFilter, "i");
-  }
-  if (req.body.lastNameFilter) {
-    filters.lastName = new RegExp(req.body.lastNameFilter, "i");
-  }
-  if (req.body.emailFilter) {
-    filters.email = new RegExp(req.body.emailFilter, "i");
-  }
-  if (req.body.phoneNumberFilter) {
-    filters.phoneNumber = new RegExp(req.body.phoneNumberFilter, "i");
-  }
-
-  try {
-    let results = {
-      data: await customerModel
-        .find(filters, null, { skip: skipAmount, limit: req.body.countPerPage })
-        .sort(sort),
-      count: await customerModel
-        .countDocuments(filters, null, { skip: skipAmount, limit: req.body.countPerPage })
-        .sort(sort)
-    }
-
-    res.json(results);
-  }
-  catch (err) {
-    res.json({ message: err });
-  };
+  res.json(await retrieveCustomers(customerModel, req.body.page, req.body.countPerPage, req.body.sort, req.body.firstNameFilter, req.body.lastNameFilter,  req.body.emailFilter, req.body.phoneNumberFilter));
 });
 
 
@@ -97,14 +56,7 @@ customerRouter.put('/update', async (req, res) => {
     phoneNumber: req.body.phoneNumber
   }
 
-  try {
-    let data = await customerModel.findOneAndUpdate({ _id: req.body.id }, editedCustomer)
-    res.json(editedCustomer);
-  }
-  catch (err) {
-    res.json({ message: err });
-  };
-
+  res.json(await updateCustomer(customerModel, req.body.id, editedCustomer));
 });
 
 
@@ -128,15 +80,7 @@ customerRouter.post('/create', async (req, res) => {
     email: req.body.email,
     phoneNumber: req.body.phoneNumber
   })
-
-  try {
-    let data = await customer.save()
-    res.json(data);
-  }
-  catch (err) {
-    res.json({ message: err });
-  };
-
+  res.json(await createCustomer(customer));
 })
 
 
@@ -144,14 +88,7 @@ customerRouter.post('/create', async (req, res) => {
 //*********************//
 // Deletes a specified customer
 customerRouter.delete("/", async (req, res) => {
-  try {
-    const data = await customerModel.findOneAndDelete({ _id: req.body.id });
-
-    res.json("User Successfully Deleted!");
-  }
-  catch (err) {
-    res.json({ message: err });
-  };
+  res.json(await deleteCustomer(customerModel, req.body.id));
 });
 
 export { customerRouter };

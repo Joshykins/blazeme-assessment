@@ -9,5 +9,6 @@ blazeme-frontend/.cache/
 
 blazeme-backend/yarn.lock
 blazeme-backend/package-lock.json
-blazeme-backend/dist
+blazeme-backend/dist/
 blazeme-backend/node_modules/
+blazeme-backend/.env
