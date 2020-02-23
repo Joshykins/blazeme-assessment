@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import Home from '../pages/Home/Home';
 import Customers from '../pages/customers/Customers';
-import { Navigation } from '../components/Navigation';
+import { Navigation } from '../components/Navigation/Navigation';
 
 const NotFound = React.lazy(() => import('../pages/404/404'));
 
