@@ -5,64 +5,11 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import Axios from 'axios';
+import { customerGridInitalState } from './CustomerGridInitalState';
 
 const CustomerGrid = () => {
-  const initialState = {
-    columnDefs: [
-      {
-        headerName: "First Name",
-        field: "firstName",
-        filter: "agTextColumnFilter",
-        filterParams: {
-          applyButton: true,
-          suppressAndOrCondition: true,
-          filterOptions: ["equals"]
-        }
-      },
-      {
-        headerName: "Last Name",
-        field: "lastName",
-        filter: "agTextColumnFilter",
-        filterParams: {
-          applyButton: true,
-          suppressAndOrCondition: true,
-          filterOptions: ["equals"]
-        }
-      },
-      {
-        headerName: "Email Address",
-        field: "email",
-        filter: "agTextColumnFilter",
-        filterParams: {
-          applyButton: true,
-          suppressAndOrCondition: true,
-          filterOptions: ["equals"]
-        }
-      },
-      {
-        headerName: "Phone Number",
-        field: "phoneNumber",
-        filter: "agTextColumnFilter",
-        filterParams: {
-          applyButton: true,
-          suppressAndOrCondition: true,
-          filterOptions: ["equals"]
-        }
-      },
-      {
-        headerName: "Delete"
-      }
 
-    ],
-    defaultColDef: {
-      sortable: true,
-      resizable: true,
-      filter: true,
-      editable: true,
-    }
-  };
-
-  const [state, setState] = useState(() => { return initialState });
+  const [state, setState] = useState(() => { return customerGridInitalState });
 
   const customerDataSource = {
     getRows(params) {
@@ -134,7 +81,6 @@ const CustomerGrid = () => {
         console.log(err)
       });
   }
-
 
   return (
     <div className="ag-theme-balham gridContainer">

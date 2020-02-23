@@ -1,35 +1,33 @@
-import { CustomerActionNames } from "../actions"
+import { CustomerActionNames } from "../actions";
 
 
 const initalState = {
-  loading: false,
-  customerData = [
-    {
-      "_id": "5e4f506e08c8540f3dfc7eb5",
-      "firstName": "Gisela",
-      "lastName": "'t Hart",
-      "email": "gisela.'thart@example.com",
-      "phoneNumber": "(902)-239-7011",
-      "__v": 0
-    },
-    {
-      "_id": "5e4f6dfdf0b7ab20130d5fa9",
-      "firstName": "Dianne",
-      "lastName": "'t Hart",
-      "email": "dianne.'thart@example.com",
-      "phoneNumber": "(591)-173-0762",
-      "__v": 0
-    }
-  ]
-}
+  loadingCustomerData: true,
+  customerData: [],
+  loadingCustomerCount: true,
+  customerCount: 0
+};
 
-export const customersReducer = (state = initalState, action) => {
+export const customersReducer = (
+  state = initalState, 
+  action
+  ) => {
   switch(action.type) {
-    case CustomerActionNames.GET_CUSTOMERS: {
+    case CustomerActionNames.GET_CUSTOMER_COUNT: {
       return {
         ...state,
-        loading: true 
+        loadingCustomerCount: true,
+      }
+
+    }
+    case CustomerActionNames.LOAD_IN_CUSTOMER_COUNT: {
+      return {
+        ...state,
+        loadingCustomerCount: false,
+        customerCount: action.payload
       }
     }
+    default:
+      return state;
   }
 }
