@@ -24,13 +24,13 @@ const CustomerCount = () => {
   state.customerAmountLoading = useSelector((state) => state.customersReducer.loadingCustomerCount);
 
   return (
-    <div className="customerCount">
+    <p className="customerCount">
       {!state.customerAmountLoading ? (
-        <h6>(There are currently <span className="customerCountResults">{state.customerAmount}</span> customers in the database)</h6>
+        <p>(There are currently <span className="customerCountResults">{numberWithCommas(state.customerAmount)}</span> customers in the database)</p>
       ) : (
-          <h6>(Loading customer count...)</h6>
+          <p>(Loading customer count...)</p>
         )}
-    </div>
+    </p>
   )
 }
 export default CustomerCount;

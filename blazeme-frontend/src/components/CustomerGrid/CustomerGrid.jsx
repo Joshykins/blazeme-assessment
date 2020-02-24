@@ -33,7 +33,6 @@ const CustomerGrid = () => {
   state.refreshGrid = useSelector((state) => state.customersReducer.refreshGrid);
   if(state.refreshGrid == true) {
     dispatch(GridRefreshesd())
-    console.log(state.gridAPI);
     state.gridAPI.refreshInfinitePageCache();
   }
 

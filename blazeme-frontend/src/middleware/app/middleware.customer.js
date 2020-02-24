@@ -13,7 +13,7 @@ export const CustomerMiddleware = store => next => action => {
         type: APIActionNames.API_REQUEST,
         payload: {
           method: 'GET',
-          url: 'http://localhost:3656/customers/totalcount',
+          url: '/customers/totalcount',
           nextAction: CustomerActionNames.LOAD_IN_CUSTOMER_COUNT,
           caseFail: LoggerActionNames.LOG
         }
@@ -30,7 +30,7 @@ export const CustomerMiddleware = store => next => action => {
         type: APIActionNames.API_REQUEST,
         payload: {
           method: 'GET',
-          url: 'http://localhost:3656/customers/',
+          url: '/customers/',
           params: action.payload,
           nextAction: CustomerActionNames.LOAD_IN_CUSTOMERS,
           caseFail: LoggerActionNames.LOG
@@ -48,7 +48,7 @@ export const CustomerMiddleware = store => next => action => {
         type: APIActionNames.API_REQUEST,
         payload: {
           method: 'DELETE',
-          url: 'http://localhost:3656/customers/',
+          url: '/customers/',
           data: action.payload,
           nextAction: CustomerActionNames.LOAD_CUSTOMER_DELETION,
           caseFail: LoggerActionNames.LOG
@@ -65,7 +65,7 @@ export const CustomerMiddleware = store => next => action => {
         type: APIActionNames.API_REQUEST,
         payload: {
           method:'PUT',
-          url: 'http://localhost:3656/customers/update',
+          url: '/customers/update',
           data: action.payload,
           nextAction: CustomerActionNames.LOAD_IN_CUSTOMER_UPDATE,
           caseFail: LoggerActionNames.LOG
@@ -83,7 +83,7 @@ export const CustomerMiddleware = store => next => action => {
         type: APIActionNames.API_REQUEST,
         payload: {
           method:'POST',
-          url: 'http://localhost:3656/customers/create',
+          url: '/customers/create',
           data: action.payload,
           nextAction: CustomerActionNames.LOAD_IN_CREATED_CUSTOMER,
           caseFail: LoggerActionNames.LOG

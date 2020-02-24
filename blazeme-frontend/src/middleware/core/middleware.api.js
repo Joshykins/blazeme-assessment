@@ -1,6 +1,8 @@
 import { APIActionNames } from "../../actions";
 import axios from 'axios';
 
+const baseUrl = process.env.API_ENDPOINT;
+
 export const APIMiddleware = store => next => async (
   action
 ) => {
@@ -11,7 +13,7 @@ export const APIMiddleware = store => next => async (
         try {
           const builtRequest = await axios({
             method: action.payload.method,
-            url: action.payload.url,
+            url: baseUrl + action.payload.url,
             data: action.payload.data,
           });
 
@@ -47,7 +49,7 @@ export const APIMiddleware = store => next => async (
         try {
           const builtRequest = await axios({
             method: action.payload.method,
-            url: action.payload.url,
+            url:  baseUrl +action.payload.url,
             data: action.payload.data,
           });
 
@@ -83,7 +85,7 @@ export const APIMiddleware = store => next => async (
       try {
         const builtRequest = await axios({
           method: action.payload.method,
-          url: action.payload.url,
+          url:  baseUrl +action.payload.url,
           params: action.payload.params,
           headers: {
             'Authorization': `Bearer ${action.payload.token}`
@@ -121,7 +123,7 @@ export const APIMiddleware = store => next => async (
       try {
         const builtRequest = await axios({
           method: action.payload.method,
-          url: action.payload.url,
+          url:  baseUrl +action.payload.url,
           data: action.payload.data,
         });
 
