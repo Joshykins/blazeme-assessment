@@ -6,7 +6,7 @@ import { response } from 'express';
 //Populates up to x entries
 //Recursive function to split apart request into 5000 customer packets
 let populateCustomersTo = async (desiredEntries, customerModel) => {
-  let resultsPacketSize = 5000;
+  let resultsPacketSize = 500;
   let countAdded = 0;
   //When function is called set the addec count to zero.
 
@@ -50,7 +50,7 @@ let populateCustomersTo = async (desiredEntries, customerModel) => {
     //Get request for randomuser api
     let usersFromApi = await getCustomers(resultsPacketSize);
     //format data to customer format
-    const customersToAdd = formatCustomersFromRandomUser(usersFromApi.data.results);
+    const customersToAdd = formatCustomersFromRandomUser(usersFromApi.data);
     //Add to mongoDb
     await insertCustomers(customersToAdd, customerModel);
     console.log(`${countAdded}/${desiredEntries} Customers Added.`);
@@ -60,7 +60,7 @@ let populateCustomersTo = async (desiredEntries, customerModel) => {
 
 let getCustomers = async (resultsToGet) => {
   try {
-    const response = await axios.get(`https://randomuser.me/api/?results=${resultsToGet}`)
+    const response = await axios.get(`https://uinames.com/api/?ext&amount=${resultsToGet}`)
     return response;
   }
   catch (error) {
@@ -75,10 +75,10 @@ let getCustomers = async (resultsToGet) => {
 let formatCustomersFromRandomUser = (usersArray) => {
   return usersArray.map((user => {
     return {
-      firstName: user.name.first,
-      lastName: user.name.last,
+      firstName: user.name,
+      lastName: user.surname,
       email: user.email,
-      phoneNumber: user.cell
+      phoneNumber: user.phone
     };
   }));
 };

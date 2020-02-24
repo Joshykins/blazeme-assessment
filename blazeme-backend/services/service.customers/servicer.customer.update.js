@@ -1,4 +1,4 @@
-const updateCustomer = async (customerModel, customerId, dataToReplaceCustomerWith) => {
+export const updateCustomer = async (customerModel, customerId, dataToReplaceCustomerWith) => {
 
   //Verify has email
   if (!dataToReplaceCustomerWith.email) {

@@ -1,14 +1,26 @@
-export const getCustomers = async (customerModel, page, countPerPage, sort, firstNameFilter, lastNameFilter, emailFilter, phoneNumberFilter) => {
-  //Find Record Offset
-  let skipAmount = 0;
-  if (page && countPerPage) {
-    skipAmount = (page - 1) * countPerPage;
+export const getCustomers = async (customerModel, startRow, endRow, sort, sortOrder, firstNameFilter, lastNameFilter, emailFilter, phoneNumberFilter) => {
+  //Sanitize
+  if (!endRow) {
+    return { errorMessage: "Must have a start row" };
   }
+  if (!startRow) {
+    return { errorMessage: "Must have a end row" };
+  }
+  endRow = Number(endRow);
+  startRow= Number(startRow);
+
   //Get Sort
   let pickedSort = "firstName";
   if (sort) {
     pickedSort = sort;
   }
+  let pickedSortOrder = 1
+  if (sortOrder) {
+    if (sortOrder == -1) {
+      pickedSortOrder = -1;
+    }
+  }
+  
   //Construct filter
   let filters = {}
   if (firstNameFilter) {
@@ -25,12 +37,12 @@ export const getCustomers = async (customerModel, page, countPerPage, sort, firs
   }
   try {
     let results = {
-      data: await customerModel
-        .find(filters, null, { skip: skipAmount, limit: countPerPage })
-        .sort(sort),
+      customers: await customerModel
+        .find(filters, null, { skip: startRow, limit: endRow-startRow })
+        .sort({ [pickedSort]: pickedSortOrder }),
       count: await customerModel
-        .countDocuments(filters, null, { skip: skipAmount, limit: countPerPage })
-        .sort(pickedSort)
+        .countDocuments(filters, null, { skip: startRow, limit: endRow-startRow })
+        .sort({ [pickedSort]: pickedSortOrder })
     }
     return results;
   }

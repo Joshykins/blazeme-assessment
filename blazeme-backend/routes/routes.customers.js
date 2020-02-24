@@ -1,6 +1,6 @@
 import express from 'express';
 import { customerModel } from '../models/models.customers';
-import { retrieveCustomers, getTotalCount } from '../services/service.customers/service.customers.get';
+import { getTotalCount, getCustomers } from '../services/service.customers/service.customers.get';
 import { deleteCustomer } from '../services/service.customers/service.customer.delete';
 import { createCustomer } from '../services/service.customers/service.customer.create';
 import { updateCustomer } from '../services/service.customers/servicer.customer.update';
@@ -22,7 +22,8 @@ customerRouter.get('/totalcount', async (req, res) => {
 {
 	"page" : 1, //Page numb
 	"countPerPage" : 50, // amount displayed per page
-	"sort" : "firstName", // field we're sorting by
+  "sort" : "firstName", // field we're sorting by
+  "sortOrder" : 1,
   "firstNameFilter" : "Josh" // first name filter
   "lastNameFilter" : "Roelle" // first name filter
   "emailFilter" : "joshuaroelle2@gmail.com" // email filter
@@ -30,7 +31,7 @@ customerRouter.get('/totalcount', async (req, res) => {
 }
 */
 customerRouter.get('/', async (req, res) => {
-  res.json(await retrieveCustomers(customerModel, req.body.page, req.body.countPerPage, req.body.sort, req.body.firstNameFilter, req.body.lastNameFilter,  req.body.emailFilter, req.body.phoneNumberFilter));
+  res.json(await getCustomers(customerModel, req.query.startRow, req.query.endRow, req.query.sort, req.query.sortOrder, req.query.firstNameFilter, req.query.lastNameFilter,  req.query.emailFilter, req.query.phoneNumberFilter));
 });
 
 

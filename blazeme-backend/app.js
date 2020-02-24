@@ -19,13 +19,15 @@ import bodyParser from 'body-parser';
 import populateCustomersTo from './services/service.populate';
 import { customerModel } from './models/models.customers';
 
+//cors
+import cors from 'cors';
+
+
+
 //Connect To DB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
   console.log("Connected to DB Sucessfully!");
-
-  //Populate
-  //Populates up to x amounts of users using randomuser.me
-  populateCustomersTo(347237, customerModel);
+  populateCustomersTo(137456, customerModel);
 });
 
 
@@ -34,6 +36,7 @@ const app = express();
 // Body Parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 
 //Routers
 app.use('/customers', customerRouter);
