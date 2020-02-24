@@ -5,8 +5,10 @@ blazeme-frontend/.awcache
 blazeme-frontend/.idea
 blazeme-frontend/dist/
 blazeme-frontend/.cache/
+blazeme-frontend/yarn-error.log
 
 
+blazeme-frontend/yarn-error.log
 blazeme-backend/yarn.lock
 blazeme-backend/package-lock.json
 blazeme-backend/dist/
