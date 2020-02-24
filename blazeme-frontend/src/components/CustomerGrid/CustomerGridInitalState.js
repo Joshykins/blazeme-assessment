@@ -1,4 +1,11 @@
 export const customerGridInitalState = {
+  setCustomers: undefined,
+  loadingCustomers: true,
+  loadingCustomerDeletion: false,
+  loadingCustomerUpdate: false,
+  gridAPI: undefined,
+  loadGrid: false,
+  refreshGrid: false,
   columnDefs: [
     {
       headerName: "First Name",
@@ -43,11 +50,15 @@ export const customerGridInitalState = {
     },
     {
       headerName: "Delete",
-      width: 25,
-      resizeable: false
+      width: 100,
+      resizable: false,
+      editable: false,
+      cellRenderer: 'deleteButton'
     }
-
   ],
+  components: {
+    deleteButton: undefined
+  },
   defaultColDef: {
     sortable: true,
     resizable: true,
