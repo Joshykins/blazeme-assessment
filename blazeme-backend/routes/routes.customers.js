@@ -89,7 +89,7 @@ customerRouter.post('/create', async (req, res) => {
 //*********************//
 // Deletes a specified customer
 customerRouter.delete("/", async (req, res) => {
-  res.json(await deleteCustomer(customerModel, req.body.id));
+  res.json(await deleteCustomer(customerModel, req.body._id));
 });
 
 export { customerRouter };

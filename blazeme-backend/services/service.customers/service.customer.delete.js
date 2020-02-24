@@ -1,6 +1,7 @@
 export const deleteCustomer = async (customerModel, id) => {
   try {
-    const data = await customerModel.findOneAndDelete({ _id: req.body.id });
+    console.log(id)
+    const data = await customerModel.findOneAndDelete({ _id: id});
 
     return { message:"User Successfully Deleted!" };
   }
